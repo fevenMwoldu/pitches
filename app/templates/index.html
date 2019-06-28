@@ -1,0 +1,24 @@
+{% extends 'base.html'%} {% block content %}
+<table class="table" align="center">
+    <thead>
+        <tr>
+            <th>
+                <h1>News Sources</h1>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for source in sources%}
+        <tr>
+            <td>
+                <a href="{{ url_for('main.articles', source_id=source['id']) }}">
+                    <h2>{{source.name}}</h2>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
