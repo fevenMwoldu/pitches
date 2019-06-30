@@ -8,17 +8,29 @@
 
         </tr>
     </thead>
-    <!--<tbody>
-        {% for source in sources%}
-        <tr>
-            <td>
-                <a href="{{ url_for('main.articles', source_id=source['id']) }}">
-                    <h2>{{source.name}}</h2>
-                </a>
-            </td>
 
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Pitches</th>
+            <th scope="col">Submitted_by</th>
+            <th scope="col">Comments</th>
+            <th scope="col">upvote</th>
+            <th scope="col">downvote</th>
         </tr>
-        {% endfor %}
-    </tbody>-->
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>feven</td>
+            <td>It's good</td>
+            <td>20</td>
+            <td>5</td>
+        </tr>
+
+    </tbody>
 </table>
 {% endblock %}
