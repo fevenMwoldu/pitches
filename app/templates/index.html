@@ -1,36 +1,47 @@
 {% extends 'base.html'%} {% block content %}
-<table class="table" align="center">
-    <thead>
-        <tr>
-            <th>
-                <h1>List of pitches</h1>
-            </th>
 
-        </tr>
-    </thead>
+<h1>List of pitches</h1>
 
-</table>
+
+
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Pitches</th>
-            <th scope="col">Submitted_by</th>
-            <th scope="col">Comments</th>
-            <th scope="col">upvote</th>
-            <th scope="col">downvote</th>
-        </tr>
-    </thead>
     <tbody>
+        <thead>
+            <tr>
+                <th>
+                    <h3>ID</h3>
+                </th>
+                <th>
+                    <h3>Pitch content</h3>
+                </th>
+                <th>
+                    <h3><img src="../static/thumbs_up.png" height="70" width="70" alt="no image"></h3>
+                </th>
+                <th>
+                    <h3><img src="../static/thumbs_down.png" height="70" width="70" alt="no image"></h3>
+                </th>
+                <th>
+                    <h3>Comments</h3>
+                </th>
+
+            </tr>
+        </thead>
+
+        {% for pitch in pitches %}
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>feven</td>
-            <td>It's good</td>
-            <td>20</td>
-            <td>5</td>
+            <td>{{ pitch.id }}</td>
+            <td>{{ pitch.content }}</td>
+            <td><button type="button" class="btn btn-secondary" onclick="upvote_count()">{{ pitch.upvotes }}</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="downvote_count()">{{ pitch.downvotes }}</button></td>
+            {% for comment in Comments %}
+            <td>{{ comment.content }}</td>
+            {% endfor %}
+
         </tr>
 
+
+        {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}

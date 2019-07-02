@@ -1,8 +1,11 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-# from . login_manager
+from . import login_manager
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -48,6 +51,10 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='category', lazy="dynamic")
+    
+    def save_category(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return f'Category {self.category_name}'
@@ -63,6 +70,10 @@ class Pitch(db.Model):
     downvotes = db.Column(db.Integer)
     comments = db.relationship('Comment', backref='pitch', lazy="dynamic")
 
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
     def __repr__(self):
         return f'Pitch {self.content}'
 
@@ -73,6 +84,10 @@ class Comment(db.Model):
     content = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     pitch_id = db.Column(db.Integer, db.ForeignKey("pitch.id"))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return f'Comment {self.content}'
